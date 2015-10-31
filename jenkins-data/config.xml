@@ -19,7 +19,7 @@
   <clouds>
     <org.jenkinsci.plugins.mesos.MesosCloud plugin="mesos@0.8.0">
       <name>MesosCloud</name>
-      <nativeLibraryPath>/var/jenkins_home/mesos/libmesos-0.21.1.so</nativeLibraryPath>
+      <nativeLibraryPath>/var/lib/libmesos-0.24.1.so</nativeLibraryPath>
       <master>172.17.8.101:5050</master>
       <description></description>
       <frameworkName>Jenkins Scheduler</frameworkName>
@@ -28,7 +28,7 @@
       <secret></secret>
       <checkpoint>false</checkpoint>
       <onDemandRegistration>true</onDemandRegistration>
-      <jenkinsURL>http://172.17.8.101:8181</jenkinsURL>
+      <jenkinsURL>http://172.17.8.101:8080</jenkinsURL>
       <slaveInfos>
         <org.jenkinsci.plugins.mesos.MesosSlaveInfo>
           <slaveCpus>0.1</slaveCpus>
