@@ -23,15 +23,15 @@ This project just works out of the box with but needs an active internet connect
 
 ####Then:
 
-You have to start services yourself with ```systemctl```, a utility baked into CoreOs designed to stop, start and manage processes defined in [unit files](https://coreos.com/docs/launching-containers/launching/getting-started-with-systemd/), for example let's start gitbucket:
+You have to start services yourself with [systemctl](https://coreos.com/docs/launching-containers/launching/getting-started-with-systemd/), a utility baked into CoreOs designed to start, stop and manage processes defined in unit files. Let's start mesos:
 
     $ vagrant ssh core-01
-    $ sudo systemctl start gitbucket
+    $ sudo systemctl start mesos-master
 
 You can follow the progress of services booting when logging on to a core, for example core-01:
 
     $ vagrant ssh core-01
-    $ journalctl -u gitbucket -f
+    $ journalctl -u mesos-master -f
 
 ## Services Provided
 
@@ -40,15 +40,18 @@ _Once a sevice is started these links below will point to your local instance of
 ### core-01
 
 - docker.service
-- docker-registry.service - URL: [Docker Registry](http://172.17.8.101:5000/v2/_catalog)
 - jenkins.service - URL: [Jenkins](http://172.17.8.101:8080)
-- gitbucket.service - URL: [GitBucket](http://172.17.8.101:8081) (login:root-root)
-- Selenium Hub.service - URL: [Selenium Hub](http://172.17.8.101:4444/grid/console)
+- selenium-hub.service - URL: [Selenium Hub](http://172.17.8.101:4444/grid/console)
 - mesos-master.service - URL: [Mesos Master](http://172.17.8.101:5050)
+- mesos-slave.service
 - marathon.service - URL: [Marathon](http://172.17.8.101:8082)
+- node-chrome.service
+- node-firefox.service
 
 ### core-02
 
 - docker.service
 - mesos-slave.service
 - chrome-debug.service - URL: [Chrome Debug](http://172.17.8.101:4448/grid/console)
+- node-chrome.service
+- node-firefox.service
