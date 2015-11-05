@@ -7,7 +7,7 @@ Current set up allocates 6 CPU and 6 GB of memory._
 
 ####Prerequisites
 
-- Download [data-online.tar.gz](http://bit.ly/scale-qa-data-online) and unzip, place in root of this project (_overwrite data directory_)
+- This project runs out of the box but needs an active internet connection to download docker images and github projects. If you want to use this project _offline_ please checkout branch **"offline"**.
 - [Vagrant](https://www.vagrantup.com/) + [VirtualBox](https://www.virtualbox.org/)
 - For linux users: install nfs-kernel services, for example ```apt-get install nfs-kernel-server```
 
