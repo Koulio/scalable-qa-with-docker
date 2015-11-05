@@ -5,11 +5,12 @@
 _This clusters is configured to use a significant amount of resources.
 Current set up allocates 6 CPU and 6 GB of memory._
 
+This project just works out of the box with but needs an active internet connection to download docker images and github projects. If you want to use this project _offline_ please checkout the branch **"offline"**.
+
 ####Prerequisites
 
-- This project runs out of the box but needs an active internet connection to download docker images and github projects. If you want to use this project _offline_ please checkout branch **"offline"**.
 - [Vagrant](https://www.vagrantup.com/) + [VirtualBox](https://www.virtualbox.org/)
-- For linux users: install nfs-kernel services, for example ```apt-get install nfs-kernel-server```
+- _For linux users_: install nfs-kernel services, for example ```apt-get install nfs-kernel-server```
 
 ####Given:
 
@@ -34,7 +35,7 @@ You can follow the progress of services booting when logging on to a core, for e
 
 ## Services Provided
 
-_Once a sevice is started below links will point to your local instance of the running service._
+_Once a sevice is started these links below will point to your local instance of the running service._
 
 ### core-01
 
