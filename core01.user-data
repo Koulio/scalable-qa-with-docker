@@ -32,43 +32,13 @@ coreos:
 
       [Install]
       WantedBy=sockets.target
-  - name: docker.service
-    drop-ins:
-    - name: 50-insecure-registry.conf
-      content: |
-        [Service]
-        Environment='DOCKER_OPTS=--insecure-registry="docker-registry:5000"'
-    command: start
-  - name: docker-registry.service
-    command: start
-    enable: true
-    content: |
-      [Unit]
-      Description=Docker Registry
-      After=docker.service
-      Requires=docker.service
-      Requires=registry.mount
-
-      [Service]
-      Restart=always
-      RestartSec=5
-      TimeoutStartSec=0
-      ExecStartPre=/usr/bin/docker load -i /registry/docker-registry-2.1.1.tar
-      ExecStartPre=-/usr/bin/docker kill registry
-      ExecStartPre=-/usr/bin/docker rm registry
-      ExecStart=/usr/bin/docker run \
-          -p 5000:5000 \
-          -v /registry:/var/lib/registry \
-          --name=registry \
-          registry:2.1.1
-      ExecStop=/usr/bin/docker stop registry
   - name: jenkins.service
     command: start
     enable: true
     content: |
       [Unit]
       Description=Jenkins
-      After=docker.service gitbucket.service
+      After=docker.service
       Requires=docker.service
       Requires=jenkins.mount
 
