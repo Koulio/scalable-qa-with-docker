@@ -7,7 +7,7 @@ Current set up allocates 6 CPU and 6 GB of memory._
 
 ####Prerequisites
 
-- Download [data.zip](http://bit.ly/scale-qa-data) and unzip, place in root of this project (_overwrite data directory_)
+- Download [data-online.tar.gz](http://bit.ly/scale-qa-data-online) and unzip, place in root of this project (_overwrite data directory_)
 - [Vagrant](https://www.vagrantup.com/) + [VirtualBox](https://www.virtualbox.org/)
 
 ####Given:
