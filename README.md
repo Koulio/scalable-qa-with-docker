@@ -7,7 +7,7 @@ Current set up allocates 6 CPU and 6 GB of memory._
 
 ####Prerequisites
 
-- Download [data.tar.gz](http://bit.ly/scale-qa-data-online) and unzip, place in root of this project (_overwrite data directory_)
+- Download [data.tar.gz](http://bit.ly/scale-qa-data-online) (3.49 GB) and unzip, place in root of this project (_overwrite data directory_). Switch to the _master_ branch to work with the **"online"** version of this project.
 - [Vagrant](https://www.vagrantup.com/) + [VirtualBox](https://www.virtualbox.org/)
 - For linux users: install nfs-kernel services, for example ```apt-get install nfs-kernel-server```
 
@@ -22,7 +22,7 @@ Current set up allocates 6 CPU and 6 GB of memory._
 
 ####Then:
 
-You have to start services yourself with ```systemctl```, a utility baked into CoreOs designed to stop, start and manage processes defined in [unit files](https://coreos.com/docs/launching-containers/launching/getting-started-with-systemd/), for example let's start gitbucket:
+You have to start services yourself with [systemctl](https://coreos.com/docs/launching-containers/launching/getting-started-with-systemd/), a utility baked into CoreOs designed to start, stop and manage processes defined in unit files. Let's start gitbucket:
 
     $ vagrant ssh core-01
     $ sudo systemctl start gitbucket
@@ -42,12 +42,17 @@ _Once a sevice is started below links will point to your local instance of the r
 - docker-registry.service - URL: [Docker Registry](http://172.17.8.101:5000/v2/_catalog)
 - jenkins.service - URL: [Jenkins](http://172.17.8.101:8080)
 - gitbucket.service - URL: [GitBucket](http://172.17.8.101:8081) (login:root-root)
-- Selenium Hub.service - URL: [Selenium Hub](http://172.17.8.101:4444/grid/console)
+- selenium-hub.service - URL: [Selenium Hub](http://172.17.8.101:4444/grid/console)
+- node-chrome.service
+- node-firefox.service
 - mesos-master.service - URL: [Mesos Master](http://172.17.8.101:5050)
+- mesos-slave.service
 - marathon.service - URL: [Marathon](http://172.17.8.101:8082)
 
 ### core-02
 
 - docker.service
 - mesos-slave.service
+- node-chrome.service
+- node-firefox.service
 - chrome-debug.service - URL: [Chrome Debug](http://172.17.8.101:4448/grid/console)
