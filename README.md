@@ -7,7 +7,7 @@ Current set up allocates 6 CPU and 6 GB of memory._
 
 ####Prerequisites
 
-- Download [data.tar.gz](http://bit.ly/scale-qa-data-online) (3.49 GB) and unzip, place in root of this project (_overwrite data directory_). Switch to the _master_ branch to work with the **"online"** version of this project.
+- Download [data.tar.gz](http://bit.ly/data-scale-qa) (3.49 GB) and unzip, place in root of this project (_overwrite data directory_). Switch to the _master_ branch to work with the **"online"** version of this project if you like.
 - [Vagrant](https://www.vagrantup.com/) + [VirtualBox](https://www.virtualbox.org/)
 - For linux users: install nfs-kernel services, for example ```apt-get install nfs-kernel-server```
 
