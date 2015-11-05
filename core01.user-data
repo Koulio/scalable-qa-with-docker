@@ -56,30 +56,6 @@ coreos:
           --name="ci-jenkins" \
           mjvdende/jenkins-protractor-chrome
       ExecStop=/usr/bin/docker stop ci-jenkins
-  - name: gitbucket.service
-    command: stop
-    enable: true
-    content: |
-      [Unit]
-      Description=Docker GitBucket, a github clone
-      After=docker.service
-      Requires=docker.service
-      Requires=gitbucket.mount
-
-      [Service]
-      Restart=always
-      RestartSec=5
-      TimeoutStartSec=0
-      ExecStartPre=-/usr/bin/docker pull hiono/gitbucket
-      ExecStartPre=-/usr/bin/docker kill git-gitbucket
-      ExecStartPre=-/usr/bin/docker rm git-gitbucket
-      ExecStart=/usr/bin/docker run \
-          -v /gitbucket:/var/gitbucket \
-          -p 29418:29418 \
-          -p 8081:8080 \
-          --name="git-gitbucket" \
-          hiono/gitbucket
-      ExecStop=/usr/bin/docker stop git-gitbucket
   - name: selenium-hub.service
     command: stop
     enable: true

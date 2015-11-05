@@ -3,17 +3,12 @@
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <org.jenkinsci.plugins.gitbucket.GitBucketProjectProperty plugin="gitbucket@0.8">
-      <linkEnabled>false</linkEnabled>
-    </org.jenkinsci.plugins.gitbucket.GitBucketProjectProperty>
-  </properties>
+  <properties/>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>http://172.17.8.101:8081/git/root/protractor-browsers-drivers.git</url>
-        <credentialsId>a806871f-2851-419c-9585-5a2d8e3ff3e8</credentialsId>
+        <url>https://github.com/mjvdende/scalable-qa-protractor-tests.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -39,9 +34,10 @@ protractor conf.js</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.9">
+    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.2-beta-4">
       <testResults>*.xml</testResults>
       <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
   </publishers>
