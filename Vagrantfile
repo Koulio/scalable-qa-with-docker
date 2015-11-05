@@ -58,7 +58,6 @@ Vagrant.configure("2") do |config|
 
       config.vm.provision 'shell' do |s|
         s.path = 'provision.sh'
-        s.args = [$ip_docker_registry]
       end
 
       ip = "172.17.8.#{i+100}"
