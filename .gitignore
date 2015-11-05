@@ -7,7 +7,9 @@ log/
 !jenkins-data/jobs/suite-demo/config.xml
 !jenkins-data/jobs/suite-todo/config.xml
 !jenkins-data/plugins/git.jpi
+!jenkins-data/plugins/git-client.jpi
 !jenkins-data/plugins/greenballs.jpi
 !jenkins-data/plugins/mesos.jpi
+!jenkins-data/plugins/scm-api.jpi
 !jenkins-data/slave.jar
 jenkins-data
