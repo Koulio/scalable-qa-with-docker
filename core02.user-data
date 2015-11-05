@@ -32,6 +32,13 @@ coreos:
 
       [Install]
       WantedBy=sockets.target
+  - name: docker.service
+    drop-ins:
+    - name: 50-insecure-registry.conf
+      content: |
+        [Service]
+        Environment='DOCKER_OPTS=--insecure-registry="docker-registry:5000"'
+    command: start
   - name: mesos-slave.service
     command: stop
     enable: true
@@ -45,9 +52,9 @@ coreos:
       Restart=always
       RestartSec=5
       TimeoutStartSec=0
-      ExecStartPre=-/usr/bin/docker pull mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
-      ExecStartPre=-/usr/bin/docker kill mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
-      ExecStartPre=-/usr/bin/docker rm mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
+      ExecStartPre=-/usr/bin/docker pull docker-registry:5000/mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
+      ExecStartPre=-/usr/bin/docker kill docker-registry:5000/mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
+      ExecStartPre=-/usr/bin/docker rm docker-registry:5000/mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
       ExecStart=/usr/bin/docker run \
           -p 5051:5051 \
           -e MESOS_HOSTNAME=172.17.8.102 \
@@ -65,7 +72,7 @@ coreos:
           -v /usr/lib/libdevmapper.so.1.02:/usr/lib/libdevmapper.so.1.02 \
           --privileged=true \
           --net=host \
-          mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
+          docker-registry:5000/mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
       ExecStop=/usr/bin/docker stop mesos-slave
   - name: chrome-debug.service
     command: stop
@@ -80,14 +87,14 @@ coreos:
       Restart=always
       RestartSec=5
       TimeoutStartSec=0
-      ExecStartPre=-/usr/bin/docker pull selenium/standalone-chrome-debug:2.47.1
+      ExecStartPre=-/usr/bin/docker pull docker-registry:5000/selenium/standalone-chrome-debug:2.47.1
       ExecStartPre=-/usr/bin/docker kill chrome-debug
       ExecStartPre=-/usr/bin/docker rm chrome-debug
       ExecStart=/usr/bin/docker run \
           -P \
           -p 4448:4444 \
           --name="chrome-debug" \
-          selenium/standalone-chrome-debug:2.47.1
+          docker-registry:5000/selenium/standalone-chrome-debug:2.47.1
       ExecStop=/usr/bin/docker stop chrome-debug
   - name: node-chrome.service
     command: stop
@@ -102,7 +109,7 @@ coreos:
       Restart=always
       RestartSec=5
       TimeoutStartSec=0
-      ExecStartPre=-/usr/bin/docker pull selenium/node-chrome:2.47.1
+      ExecStartPre=-/usr/bin/docker pull docker-registry:5000/selenium/node-chrome:2.47.1
       ExecStartPre=-/usr/bin/docker kill node-chrome
       ExecStartPre=-/usr/bin/docker rm node-chrome
       ExecStart=/usr/bin/docker run \
@@ -111,7 +118,7 @@ coreos:
           -e HUB_PORT_4444_TCP_PORT=4444 \
           -e REMOTE_HOST=http://172.17.8.102:5555 \
           --name="node-chrome" \
-          selenium/node-chrome:2.47.1
+          docker-registry:5000/selenium/node-chrome:2.47.1
       ExecStop=/usr/bin/docker stop node-chrome
   - name: node-firefox.service
     command: stop
@@ -126,7 +133,7 @@ coreos:
       Restart=always
       RestartSec=5
       TimeoutStartSec=0
-      ExecStartPre=-/usr/bin/docker pull selenium/node-firefox:2.47.1
+      ExecStartPre=-/usr/bin/docker pull docker-registry:5000/selenium/node-firefox:2.47.1
       ExecStartPre=-/usr/bin/docker kill node-firefox
       ExecStartPre=-/usr/bin/docker rm node-firefox
       ExecStart=/usr/bin/docker run \
@@ -135,5 +142,5 @@ coreos:
           -e HUB_PORT_4444_TCP_PORT=4444 \
           -e REMOTE_HOST=http://172.17.8.102:5556 \
           --name="node-firefox" \
-          selenium/node-firefox:2.47.1
+          docker-registry:5000/selenium/node-firefox:2.47.1
       ExecStop=/usr/bin/docker stop node-firefox
