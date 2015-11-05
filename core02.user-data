@@ -52,6 +52,7 @@ coreos:
       Restart=always
       RestartSec=5
       TimeoutStartSec=0
+      ExecStartPre=-/usr/bin/docker pull mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
       ExecStartPre=-/usr/bin/docker kill mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
       ExecStartPre=-/usr/bin/docker rm mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
       ExecStart=/usr/bin/docker run \
@@ -132,7 +133,7 @@ coreos:
       Restart=always
       RestartSec=5
       TimeoutStartSec=0
-      ExecStartPre=-/usr/bin/docker pull docker-registry:5000/selenium/node-firefox:2.47.1
+      ExecStartPre=-/usr/bin/docker pull selenium/node-firefox:2.47.1
       ExecStartPre=-/usr/bin/docker kill node-firefox
       ExecStartPre=-/usr/bin/docker rm node-firefox
       ExecStart=/usr/bin/docker run \
@@ -141,5 +142,5 @@ coreos:
           -e HUB_PORT_4444_TCP_PORT=4444 \
           -e REMOTE_HOST=http://172.17.8.102:5556 \
           --name="node-firefox" \
-          docker-registry:5000/selenium/node-firefox:2.47.1
+          selenium/node-firefox:2.47.1
       ExecStop=/usr/bin/docker stop node-firefox

@@ -7,5 +7,5 @@ log/
 !jenkins-data/jobs/selenium-hub/config.xml
 !jenkins-data/jobs/suite-demo/config.xml
 !jenkins-data/jobs/suite-todo/config.xml
-jenkins-data/
+jenkins-data
 data/

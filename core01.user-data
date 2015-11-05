@@ -92,7 +92,7 @@ coreos:
     content: |
       [Unit]
       Description=Docker GitBucket, a github clone
-      After=docker.service docker-registry.service
+      After=docker.service
       Requires=docker.service
       Requires=gitbucket.mount
 
@@ -106,7 +106,7 @@ coreos:
       ExecStart=/usr/bin/docker run \
           -v /gitbucket:/var/gitbucket \
           -p 29418:29418 \
-          -p 8989:8080 \
+          -p 8081:8080 \
           --name="git-gitbucket" \
           hiono/gitbucket
       ExecStop=/usr/bin/docker stop git-gitbucket
@@ -190,8 +190,9 @@ coreos:
       ExecStartPre=-/usr/bin/docker kill zookeeper
       ExecStartPre=-/usr/bin/docker rm zookeeper
       ExecStart=/usr/bin/docker run \
+          -p 2181:2181 \
           -e MYID=1 \
-          -e SERVERS=172.17.8.101
+          -e SERVERS=172.17.8.101 \
           --name="zookeeper" \
           mesoscloud/zookeeper:3.4.6-ubuntu-14.04
       ExecStop=/usr/bin/docker stop zookeeper
@@ -221,7 +222,7 @@ coreos:
           -e "MESOS_QUORUM=1" \
           -e "MESOS_REGISTRY=in_memory" \
           -e "MESOS_WORK_DIR=/var/lib/mesos" \
-          --net="host"
+          --net="host" \
           --name="mesos-master" \
           mesoscloud/mesos-master:0.24.1-ubuntu-14.04
       ExecStop=/usr/bin/docker stop mesos-master
@@ -238,6 +239,7 @@ coreos:
       Restart=always
       RestartSec=5
       TimeoutStartSec=0
+      ExecStartPre=-/usr/bin/docker pull mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
       ExecStartPre=-/usr/bin/docker kill mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
       ExecStartPre=-/usr/bin/docker rm mesoscloud/mesos-slave:0.24.1-ubuntu-14.04
       ExecStart=/usr/bin/docker run \
@@ -272,14 +274,16 @@ coreos:
       Restart=always
       RestartSec=5
       TimeoutStartSec=0
+      ExecStartPre=-/usr/bin/docker pull mesoscloud/marathon:0.11.0-ubuntu-15.04
       ExecStartPre=-/usr/bin/docker kill marathon
       ExecStartPre=-/usr/bin/docker rm marathon
       ExecStart=/usr/bin/docker run \
+          -p 8082:8080
           -e MARATHON_HOSTNAME=172.17.8.101 \
           -e MARATHON_HTTP_ADDRESS=172.17.8.101 \
           -e MARATHON_MASTER=zk://172.17.8.101:2181/mesos \
           -e MARATHON_ZK=zk://172.17.8.101:2181/marathon \
-          --name marathon \
-          --net host \
+          --name=marathon \
+          --net=host \
           mesoscloud/marathon:0.11.0-ubuntu-15.04
       ExecStop=/usr/bin/docker stop marathon
