@@ -197,7 +197,6 @@ coreos:
           -e "MESOS_MASTER=zk://172.17.8.101:2181/mesos" \
           -e "MESOS_ISOLATOR=cgroups/cpu,cgroups/mem" \
           -e "MESOS_CONTAINERIZERS=docker,mesos" \
-          -e "MESOS_EXECUTOR_REGISTRATION_TIMEOUT:5mins" \
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v /usr/bin/docker:/usr/bin/docker \
           -v /sys:/sys \
